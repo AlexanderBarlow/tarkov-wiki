@@ -1,6 +1,7 @@
 import styles from "./index.module.css";
 import Head from "next/head";
 import Link from "next/link";
+import ItemCard from "~/components/itemCard";
 
 export default function Home() {
   return (
@@ -27,6 +28,9 @@ export default function Home() {
                 database and authentication.
               </div>
             </Link>
+            <ItemCard>
+              
+            </ItemCard>
             <Link
               className={styles.card}
               href="https://create.t3.gg/en/introduction"
@@ -38,8 +42,12 @@ export default function Home() {
                 to deploy it.
               </div>
             </Link>
+            
           </div>
         </div>
+        <div>
+        </div>
+      
       </main>
     </>
   );
