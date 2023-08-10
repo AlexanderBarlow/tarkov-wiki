@@ -10,35 +10,27 @@ type State = {}
 
 const query = JSON.stringify({
 query: `{
-  items {
-      id
-      name
-      shortName
-      wikiLink
-      iconLink
-      updated
+  items(name: "Assault Rifle") {
+    id
+    shortName
+  sellFor {
+    price
+    currency
+    priceRUB
+    source
+  }
+  avg24hPrice
+	description
+ 	category {
+    id
+    name
+ 	}
   }
 }`
 
 })
 
-// items(name: "Assault Rifle") {
-//     id
-//     shortName
-//   sellFor {
-//     price
-//     currency
-//     priceRUB
-//     source
-//   }
-//   avg24hPrice
-// 	description
-//  	category {
-//     id
-//     name
-//  	}
-//   }
-// }
+
 
 const options = {
     method: 'POST',
@@ -58,7 +50,10 @@ const request = https.request(options, (res: any) => {
     data += d;
   });
   res.on('end', () => {
-    console.log(JSON.parse(data).data);
+    // console.log(JSON.parse(data));
+    const returnData = JSON.parse(data)
+    console.log(returnData.data.items);
+    
   })
 })
 request.on('error', (error: any) => {
