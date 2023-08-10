@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/client";
 import { log } from 'console';
+import { gql, useQuery } from '@apollo/client';
+const https = require('https');
 
 type Props = {}
 
 type State = {} 
 
 
-const query = gql`
-{
-    items(name: "m855a1") {
-        id
-        name
-        shortName
-    }
-}
-`
+const query = JSON.stringify({
+query: `{
+  items {
+      id
+      name
+      shortName
+      wikiLink
+      iconLink
+      updated
+  }
+}`
+
+})
 
 // items(name: "Assault Rifle") {
 //     id
@@ -38,26 +42,43 @@ const query = gql`
 
 const options = {
     method: 'POST',
+    hostname: 'api.tarkov.dev/graphql',
     headers: {
       'Content-Type': 'application/json',
+      'Content-Length': query.length,
     },
-    body: JSON.stringify({
-        query
-    })
+
   };
 
-const request = new Request('https://api.tarkov.dev/graphql', options)
+const request = https.request(options, (res: any) => {
+  let data = '';
+  console.log(`statusCode: ${res}`);
 
-fetch(request)
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    console.log('Data:', data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
+  res.on('data', (d: any) => {
+    data += d;
   });
+  res.on('end', () => {
+    console.log(JSON.parse(data).data);
+  })
+})
+request.on('error', (error: any) => {
+  console.error(error);
+});
+
+request.write(query);
+request.end();
+ 
+
+// fetch(request)
+//   .then(response => {
+//     return response.json();
+//   })
+//   .then(data => {
+//     console.log('Data:', data);
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
+//   });
 
 export class ItemCard extends Component<Props, State> {
   state = {}
