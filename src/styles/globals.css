@@ -1,4 +1,9 @@
 html,
+
+main {
+  background-color: #030712 !important;
+}
+
 body {
   padding: 0;
   margin: 0;

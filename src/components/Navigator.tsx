@@ -23,26 +23,18 @@ const categories = [
     id: 'Build',
     children: [
       {
-        id: 'Authentication',
+        id: 'Assualt Rifles',
         icon: <PeopleIcon />,
         active: true,
       },
-      { id: 'Database', icon: <DnsRoundedIcon /> },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Hosting', icon: <PublicIcon /> },
-      { id: 'Functions', icon: <SettingsEthernetIcon /> },
+      { id: 'Sub-Machine Guns', icon: <DnsRoundedIcon /> },
+      { id: 'Sniper Rifles', icon: <PermMediaOutlinedIcon /> },
+      { id: 'Light Machine Guns', icon: <PublicIcon /> },
+      { id: 'Handguns', icon: <SettingsEthernetIcon /> },
       {
-        id: 'Machine learning',
+        id: 'DMRs',
         icon: <SettingsInputComponentIcon />,
       },
-    ],
-  },
-  {
-    id: 'Quality',
-    children: [
-      { id: 'Analytics', icon: <SettingsIcon /> },
-      { id: 'Performance', icon: <TimerIcon /> },
-      { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
     ],
   },
 ];
@@ -69,13 +61,13 @@ export default function Navigator(props: DrawerProps) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-          Paperbase
+          Escape From Tarkov
         </ListItem>
         <ListItem sx={{ ...item, ...itemCategory }}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
+          <ListItemText>Weapons Vault</ListItemText>
         </ListItem>
         {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: '#101F33' }}>

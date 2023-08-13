@@ -2,7 +2,6 @@ import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { log } from "console";
 import { gql, useQuery } from "@apollo/client";
-const https = require("https");
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,93 +10,6 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Navigator from './Navigator';
 import Content from './Content';
-import Header from './Header';
-
-
-// interface Data {
-//   id: number
-//   shortName: string
-// }
-
-function ItemCard() {
-  const [posts, setPosts] = useState([]);
-
-  const query = JSON.stringify({
-    query: `{
-      items(name: "Assault Rifle") {
-        id
-        shortName
-      sellFor {
-        price
-        currency
-        priceRUB
-        source
-      }
-      avg24hPrice
-      description
-       category {
-        id
-        name
-       }
-      }
-    }`,
-  });
-
-  const options = {
-    method: "POST",
-    hostname: "api.tarkov.dev/graphql",
-    headers: {
-      "Content-Type": "application/json",
-      "Content-Length": query.length,
-    },
-  };
-
-  useEffect(() => {
-    const request = https.request(options, (res: any) => {
-      let data = "";
-
-      res.on("data", (d: any) => {
-        data += d;
-      });
-      res.on("end", () => {
-        // console.log(JSON.parse(data));
-        const returnData = JSON.parse(data);
-        const apiData = returnData.data.items;
-        console.log(returnData);
-        console.log(apiData);
-        setPosts(apiData);
-      });
-    });
-    request.on("error", (error: any) => {
-      console.error(error);
-    });
-
-    request.write(query);
-    request.end();
-  }, []);
-
-  useEffect(() => {
-    if (posts.length > 0) {
-      const post:any = posts[0];
-      console.log(post);
-      const traderSell = post.sellFor;
-      console.log(traderSell);
-    }
-  }, [posts]);
-
-  //  for (let y = 0; y < traderSell.length; y++) {
-  //   const element = traderSell[y];
-  // }
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
 
 let theme = createTheme({
   palette: {
@@ -137,7 +49,7 @@ theme = {
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: '#081627',
+          backgroundColor: '#020617',
         },
       },
     },
@@ -253,8 +165,8 @@ export default function itemCard() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+    <ThemeProvider theme={theme} >
+      <Box sx={{ display: 'flex', minHeight: '100vh'}}>
         <CssBaseline />
         <Box
           component="nav"
@@ -274,7 +186,6 @@ export default function itemCard() {
           />
         </Box>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
           <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
             <Content />
           </Box>
