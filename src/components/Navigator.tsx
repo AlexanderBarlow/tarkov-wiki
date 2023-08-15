@@ -18,6 +18,10 @@ import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+
+
+
 const categories = [
   {
     id: 'Build',
@@ -55,14 +59,12 @@ const itemCategory = {
 };
 
 export default function Navigator(props: DrawerProps) {
+  
   const { ...other } = props;
 
   return (
-    <Drawer variant="permanent" {...other}>
+    <div style={{height: "100%", backgroundColor: '#000'}}>
       <List disablePadding>
-        <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-          Escape From Tarkov
-        </ListItem>
         <ListItem sx={{ ...item, ...itemCategory }}>
           <ListItemIcon>
             <HomeIcon />
@@ -86,6 +88,6 @@ export default function Navigator(props: DrawerProps) {
           </Box>
         ))}
       </List>
-    </Drawer>
+    </div>
   );
 }

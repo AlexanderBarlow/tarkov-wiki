@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Navigator from './Navigator';
 import Content from './Content';
+import { Paper } from '@mui/material';
 
 let theme = createTheme({
   palette: {
